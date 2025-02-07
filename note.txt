@@ -1,0 +1,21 @@
+1. Structure => like a house software needs a Structure the way we organize the code
+2. maintainability => a project is never done, easily change it in the future.
+3. expandability => easily add new features.
+
+--------------------------------------------------------------------------------------------------
+
+1. Business Logic => code that actual solve the business problem.
+2. State => Stores the data about the application.
+3. HTTP library => making and receiving AJAX requests.
+4. Application Logic => implementation of application itself.
+5. Presentation Logic => visible part ui, displays application state.
+
+---------------------------------------------------------------------------------------------------
+
+the Model - View - Controller (MVC) Architecture
+
+
+                    |                                                |
+                web | <--   Model   --   Controller  --    View  --> | User
+                    | -->                  ^                         |
+                                         bridge
