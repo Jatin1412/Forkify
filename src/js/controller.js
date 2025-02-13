@@ -4,8 +4,9 @@ import 'regenerator-runtime/runtime';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
 
-if(module.hot){
+if (module.hot) {
   module.hot.accept();
 }
 
@@ -24,7 +25,6 @@ const controlRecipes = async function () {
     // 2 : rendring recipe
     if (!model.state.recipe) throw new Error('Recipe not found');
     recipeView.render(model.state.recipe);
-
   } catch (error) {
     recipeView.renderError();
   }
@@ -41,15 +41,27 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) render results
-    resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage());
+
+    // 4) Render initial pagination button
+    paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
   }
 };
 
+const controlPagination = function (goToPage) {
+  // 1) Render NEW results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  // 2) Render NEW pagination button
+  paginationView.render(model.state.search);
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerRender(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 
 init();
