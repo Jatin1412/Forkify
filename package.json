@@ -11,7 +11,7 @@
   "dependencies": {
     "core-js": "^3.38.1",
     "forkify": "file:",
-    "fractional": "^1.0.0",
+    "fraction.js": "^5.2.1",
     "parcel": "^2.12.0",
     "regenerator-runtime": "^0.14.1"
   },
