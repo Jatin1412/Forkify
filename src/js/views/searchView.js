@@ -1,24 +1,25 @@
-import View from "./View";
+class SearchView {
+  _parentEl = document.querySelector('.search');
 
-class SearchView extends View {
-    _parentElement = document.querySelector('.search');
+  getQuery() {
+      const query = this._parentEl.querySelector('.search__field').value.trim(); // Trim spaces
+      this._clearInput();
+      if (!query) return null; // Return null if empty
+      return query;
+  }
 
-    getQuery() {
-        const query = this._parentElement.querySelector('.search__field').value;
-        this._clearInput();
-        return query    
-    }
+  _clearInput() {
+      this._parentEl.querySelector('.search__field').value = '';
+  }
 
-    _clearInput() {
-        this._parentElement.querySelector('.search__field').value = '';
-    }
-
-    addHandlerRender(handler) {
-        this._parentElement.addEventListener("submit", function(e) {
-            e.preventDefault();
-            handler();
-        })
-    }
-};
+  addHandlerSearch(handler) {
+      this._parentEl.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const query = this.querySelector('.search__field').value.trim();
+          if (!query) return; // Stop execution if input is empty
+          handler();
+      });
+  }
+}
 
 export default new SearchView();
